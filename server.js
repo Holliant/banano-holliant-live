@@ -15,4 +15,4 @@ app.get('/lotto', (req, res) => {
     res.render("lotto", {});
 })
 
-app.listen(process.env["PORT"]);
+app.listen(process.env["PORT"] || 3000);
