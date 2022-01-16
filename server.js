@@ -22,4 +22,6 @@ app.get("*", (req, res, next) => {
     next();
 })
     
-app.listen(process.env["PORT"] || 3000);
+app.listen((process.env["PORT"] || 3000), () => {
+    console.log(`UI is live! http://localhost:${(process.env["PORT"] || 3000)}`);
+})
