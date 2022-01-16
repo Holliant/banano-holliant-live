@@ -2,6 +2,7 @@ body {
     background-color: rgb(58, 58, 58);
     margin: 1vw;
     padding: 2vw;
+    text-align: center;
 }
 
 header {
@@ -21,4 +22,8 @@ footer {
     color: rgb(238, 238, 11);
     margin: 1vw;
     padding: 2vw;
+}
+
+.timer{
+    color: aquamarine;
 }
