@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
     background-color: rgb(58, 58, 58);
@@ -7,10 +8,6 @@ body {
     text-align: center;
     color: rgb(238, 238, 11);
     font-family: 'Poppins', sans-serif;
-}
-
-.timer {
-    color: aquamarine;
 }
 
 h1 {
@@ -26,4 +23,31 @@ h2 {
 p {
     font-size: 1.5vw;
     margin: 1vw;
+}
+
+img.qr {
+    width: 10vw;
+}
+
+p#banCount, p#timer {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.row {
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+.column {
+    flex: 50%;
+}
+
+div.countBox {
+    background-color: black;
+    color: #64f540;
+    padding: 0.1vw;
+    margin: -1vw 1.5vw 1vw 1.5vw;
+    border-radius: 0.7vw;
 }
