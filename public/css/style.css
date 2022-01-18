@@ -51,3 +51,7 @@ div.countBox {
     margin: -1vw 1.5vw 1vw 1.5vw;
     border-radius: 0.7vw;
 }
+
+.footerSocial img {
+    width: 4vw;
+}
