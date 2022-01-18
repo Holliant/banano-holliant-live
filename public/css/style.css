@@ -46,7 +46,7 @@ p#banCount, p#timer {
 
 div.countBox {
     background-color: black;
-    color: #64f540;
+    color: #00FF44;
     padding: 0.1vw;
     margin: -1vw 1.5vw 1vw 1.5vw;
     border-radius: 0.7vw;
@@ -54,4 +54,9 @@ div.countBox {
 
 .footerSocial img {
     width: 4vw;
+}
+
+.prevWinner {
+    color: #00FF44;
+    text-decoration: none;
 }

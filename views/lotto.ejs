@@ -43,7 +43,7 @@
         <h2>How to play</h2>
 
         <p>
-            To buy 1 ticket, send [ticketPrice] BAN to the address below:
+            To buy 1 ticket, send <%= (ticketPrice / 1e29).toFixed(2) %> BAN to the address below:
             <code>ban_3zzupdpes1io1bmthjg4d15bymxdez5jkak9o3rgm4nypbp6idowg6kfie8s</code>
         </p>
 
@@ -57,7 +57,17 @@
             <b>Warning: if the amount of BAN sent is not a multiple of the ticket price, any extra BAN will
             be counted as a donation towards the jackpot.</b>
         </p>
-       
+
+        <h2>Previous winner</h2>
+
+        <p>
+            <%= previousWinner["address"] %> - <%= previousWinner["amount"] %> BAN
+            <br>
+            <a class="prevWinner" href="https://creeper.banano.cc/explorer/block/<%= previousWinner["hash"] %>" target="_blank">
+                <%= previousWinner["hash"] %>
+            </a>
+        </p>
+
         <br>
 
         <p><i>For further assistance or to report a problem/bug, DM me via discord @Holliant#6969</i></p>
@@ -72,8 +82,8 @@
 
         <script>
 
-            let jackpotAmount = 15.3;
-            let lottoEnd = Date.now() + 60000;
+            let jackpotAmount = <%= jackpotAmount %>;
+            let lottoEnd = <%= lottoEnd %>;
 
             function formatSeconds(secs) {
                 
