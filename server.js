@@ -38,10 +38,10 @@ app.get("/", (req, res, next) => {
 })
 
 app.get("/lotto", async (req, res) => {
-    let jackpotAmount = (await lottoUtils.accountInfo(lottoAddress)).balance || 0;
+    let jackpotBalance = await lottoUtils.accountBalance(lottoAddress);
     res.render("lotto", {
         "ticketPrice": config["ticket-price"],
-        "jackpotAmount": jackpotAmount,
+        "jackpotAmount": parseInt(jackpotBalance.balance) + parseInt(jackpotBalance.pending),
         "previousWinner": previousWinner,
         "lottoAddress": lottoAddress
     });

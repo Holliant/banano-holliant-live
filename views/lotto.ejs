@@ -89,6 +89,7 @@
         <script>
 
             let jackpotAmount = <%= jackpotAmount %>;
+            console.log(BigInt(jackpotAmount).toString());
             let lottoEnd = moment().endOf("day");
 
             function formatSeconds(ms) {
@@ -99,7 +100,7 @@
             }
 
             setInterval(() => {
-                document.getElementById("banCount").innerHTML = jackpotAmount.toFixed(2) + " BAN";
+                document.getElementById("banCount").innerHTML = (jackpotAmount / 1e29).toFixed(2) + " BAN";
                 document.getElementById("timer").innerHTML = formatSeconds(lottoEnd - Date.now());
                 if (lottoEnd - Date.now() < 0) {
                     location.reload();

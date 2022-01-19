@@ -39,7 +39,20 @@ const accountInfo = async (account) => {
         "representative": "true"
     });
     return accInfo;
-};
+}
+
+const accountBalance = async (account) => {
+    let toReturn = {};
+    await axios.post(config["http-node"], {  
+        "action": "account_balance",
+        "account": account
+    })
+    .then(res => {
+        toReturn = res.data;
+    })
+    .catch(err => console.log(err));
+    return toReturn;
+}
 
 const getBlockInfo = async (blockHash) => {
     let toReturn = {};
@@ -125,5 +138,6 @@ const lottoDraw = async () => {
 module.exports = {
     lottoDraw: lottoDraw,
     getLottoAddress: getLottoAddress,
-    accountInfo: accountInfo
+    accountInfo: accountInfo,
+    accountBalance: accountBalance
 };
