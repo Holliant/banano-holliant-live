@@ -15,7 +15,7 @@ lottoUtils.getLottoAddress().then(res => {
 });
 
 setInterval(() => {
-    if (moment().endOf("hour") - Date.now() <= 10000) {
+    if (moment().endOf("day") - Date.now() <= 10000) {
         lottoUtils.lottoDraw().then(lottoRes => {
             console.log(lottoRes);
             if (lottoRes["address"]) {
