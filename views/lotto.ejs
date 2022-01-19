@@ -58,15 +58,19 @@
             be counted as a donation towards the jackpot.</b>
         </p>
 
-        <h2>Previous winner</h2>
+        <% if (previousWinner["address"]) { %>
+            
+            <h2>Previous winner</h2>
+    
+            <p>
+                <%= previousWinner["address"] %> - <%= previousWinner["amount"] %> BAN
+                <br>
+                <a class="prevWinner" href="https://creeper.banano.cc/explorer/block/<%= previousWinner["hash"] %>" target="_blank">
+                    <%= previousWinner["hash"] %>
+                </a>
+            </p>
 
-        <p>
-            <%= previousWinner["address"] %> - <%= previousWinner["amount"] %> BAN
-            <br>
-            <a class="prevWinner" href="https://creeper.banano.cc/explorer/block/<%= previousWinner["hash"] %>" target="_blank">
-                <%= previousWinner["hash"] %>
-            </a>
-        </p>
+        <% } %>
 
         <br>
 
