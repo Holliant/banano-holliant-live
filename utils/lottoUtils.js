@@ -117,7 +117,6 @@ const lottoDraw = async () => {
     getLottoAddress().then(res => {
         lottoAddress = res;
     });
-    // await console.log(lottoAddress);
     // lottoDraw().then(res => console.log(res));
 })();
 
@@ -126,5 +125,3 @@ module.exports = {
     getLottoAddress: getLottoAddress,
     accountInfo: accountInfo
 };
-
-console.log(module.exports);

@@ -19,24 +19,25 @@ lottoUtils.getLottoAddress().then(res => {
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-    
-app.get("/lotto", (req, res) => {
-    res.render("lotto", {
-        "ticketPrice": config["ticket-price"],
-        "jackpotAmount": 314,
-        "lottoEnd": Date.now() + 60000,
-        "previousWinner": previousWinner,
-        "lottoAddress": lottoAddress
-    });
-})
 
-app.get("*", (req, res, next) => {
+app.get("/", (req, res, next) => {
     // res.json({
     //     "code": 404,
     //     "error": "Page not found"
     // });
     res.redirect("/lotto");
     next();
+})
+
+app.get("/lotto", async (req, res) => {
+    let jackpotAmount = (await lottoUtils.accountInfo(lottoAddress)).balance || 0;
+    console.log(jackpotAmount);
+    res.render("lotto", {
+        "ticketPrice": config["ticket-price"],
+        "jackpotAmount": jackpotAmount,
+        "previousWinner": previousWinner,
+        "lottoAddress": lottoAddress
+    });
 })
     
 app.listen((process.env["PORT"] || 3000), () => {

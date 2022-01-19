@@ -84,30 +84,26 @@
             </a>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        <script src="/js/moment.js"></script>
 
         <script>
 
             let jackpotAmount = <%= jackpotAmount %>;
-            let lottoEnd = <%= lottoEnd %>;
+            let lottoEnd = moment().endOf("week");
 
-            function formatSeconds(secs) {
-                
+            function formatSeconds(ms) {
                 function pad(n) {
                     return (n < 10 ? "0" + n : n);
                 }
-
-                var h = Math.floor(secs / 3600);
-                var m = Math.floor(secs / 60) - (h * 60);
-                var s = Math.floor(secs - h * 3600 - m * 60);
-
-                return pad(h) +":"+ pad(m) +":"+ pad(s);
-
+                return `${pad(moment.duration(ms).days())}:${pad(moment.duration(ms).hours())}:${pad(moment.duration(ms).minutes())}:${pad(moment.duration(ms).seconds())}`
             }
 
             setInterval(() => {
                 document.getElementById("banCount").innerHTML = jackpotAmount.toFixed(2) + " BAN";
-                document.getElementById("timer").innerHTML = formatSeconds((lottoEnd - Date.now()) / 1000);
+                document.getElementById("timer").innerHTML = formatSeconds(lottoEnd - Date.now());
+                if (lottoEnd - Date.now() < 0) {
+                    location.reload();
+                };
             }, 1000);
 
         </script>
