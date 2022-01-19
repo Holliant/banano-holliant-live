@@ -16,10 +16,10 @@ lottoUtils.getLottoAddress().then(res => {
 
 setInterval(() => {
     if (moment().endOf("hour") - Date.now() <= 10000) {
-        lottoUtils.lottoDraw().then(res => {
-            console.log(res);
-            if (res["address"]) {
-                previousWinner = res;
+        lottoUtils.lottoDraw().then(lottoRes => {
+            console.log(lottoRes);
+            if (lottoRes["address"]) {
+                previousWinner = lottoRes;
             };
         });
     };
@@ -27,6 +27,19 @@ setInterval(() => {
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+
+app.use(express.json()); // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+
+app.use((err, req, res, next) => {
+    // console.error(err);
+    if (err) {
+        res.json({
+            "status": 500,
+            "message": "Internal server error"
+        });
+    } else { next() };
+})
 
 app.get("/", (req, res, next) => {
     // res.json({
@@ -46,6 +59,42 @@ app.get("/lotto", async (req, res) => {
         "lottoAddress": lottoAddress
     });
 })
+
+app.post("/api*", async (req, res, next) => {
+    if (!req.body || !req.body["token"] || req.body["token"] != process.env["API_TOKEN"]) {
+        res.json({
+            "status": 401,
+            "message": "Unauthorized request"
+        });
+    } else {
+        next();
+    };
+})
+
+app.post("/api/draw_lotto", async (req, res) => {
+    lottoUtils.lottoDraw().then(lottoRes => {
+        console.log(lottoRes);
+        if (lottoRes["address"]) {
+            previousWinner = lottoRes;
+        };
+        res.json(lottoRes);
+    })
+})
+
+app.get("*", (req, res) => {
+    res.json({
+        "status": 404,
+        "message": "Not found"
+    });
+})
+
+app.post("*", (req, res) => {
+    res.json({
+        "status": 404,
+        "message": "Not found"
+    });
+})
+
     
 app.listen((process.env["PORT"] || 3000), () => {
     console.log(`UI is live! http://localhost:${(process.env["PORT"] || 3000)}`);
