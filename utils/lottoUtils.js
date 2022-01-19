@@ -103,6 +103,7 @@ const lottoDraw = async () => {
     });
     await receivePending();
     let winAmount = (await accountInfo(lottoAddress)).balance;
+    if (winnerAddress == undefined) return {};
     let payoutHash = await sendBan(winnerAddress, winAmount);
     return {
         "address": winnerAddress,
