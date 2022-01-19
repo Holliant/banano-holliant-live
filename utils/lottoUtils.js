@@ -14,11 +14,12 @@ let keys = [privateKey];
 
 let lottoAddress = "";
 
-const setup = async () => {
+const getLottoAddress = async () => {
+    let tempLottoAddy = "";
     await bananojs.getPublicKey(privateKey).then(publicKey => {
-        lottoAddress = bananojs.getBananoAccount(publicKey);
+        tempLottoAddy = bananojs.getBananoAccount(publicKey);
     });
-    console.log(`Send funds to ${lottoAddress}`);
+    return tempLottoAddy;
 }
 
 const sendBan = async (destAccount, amountRaw, pkI=0) => {
@@ -112,8 +113,18 @@ const lottoDraw = async () => {
 }
 
 (async () => {
-    await setup();
-    lottoDraw().then(res => console.log(res));
+    lottoAddress = await getLottoAddress();
+    getLottoAddress().then(res => {
+        lottoAddress = res;
+    });
+    // await console.log(lottoAddress);
+    // lottoDraw().then(res => console.log(res));
 })();
 
-module.exports = lottoDraw;
+module.exports = {
+    lottoDraw: lottoDraw,
+    getLottoAddress: getLottoAddress,
+    accountInfo: accountInfo
+};
+
+console.log(module.exports);

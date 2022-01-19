@@ -44,7 +44,7 @@
 
         <p>
             To buy 1 ticket, send <%= (ticketPrice / 1e29).toFixed(2) %> BAN to the address below:
-            <code>ban_3zzupdpes1io1bmthjg4d15bymxdez5jkak9o3rgm4nypbp6idowg6kfie8s</code>
+            <br><code><%= lottoAddress %></code>
         </p>
 
         <img class="qr" src="/media/jackpot-qr.png">
@@ -79,6 +79,8 @@
                 <img src="/media/github.png" alt="Check out our GitHub repo!">
             </a>
         </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
         <script>
 
