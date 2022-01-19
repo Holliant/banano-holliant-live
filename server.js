@@ -81,21 +81,6 @@ app.post("/api/draw_lotto", async (req, res) => {
     })
 })
 
-app.get("*", (req, res) => {
-    res.json({
-        "status": 404,
-        "message": "Not found"
-    });
-})
-
-app.post("*", (req, res) => {
-    res.json({
-        "status": 404,
-        "message": "Not found"
-    });
-})
-
-    
 app.listen((process.env["PORT"] || 3000), () => {
     console.log(`UI is live! http://localhost:${(process.env["PORT"] || 3000)}`);
 })
