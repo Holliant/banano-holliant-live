@@ -63,7 +63,7 @@
             <h2>Previous winner</h2>
     
             <p>
-                <%= previousWinner["address"] %> - <%= previousWinner["amount"] %> BAN
+                <%= previousWinner["address"] %> - <%= (previousWinner["jackpot"] / 1e29).toFixed(2) %> BAN
                 <br>
                 <a class="prevWinner" href="https://creeper.banano.cc/explorer/block/<%= previousWinner["hash"] %>" target="_blank">
                     <%= previousWinner["hash"] %>
@@ -89,7 +89,7 @@
         <script>
 
             let jackpotAmount = <%= jackpotAmount %>;
-            let lottoEnd = moment().endOf("week");
+            let lottoEnd = moment().endOf("day");
 
             function formatSeconds(ms) {
                 function pad(n) {

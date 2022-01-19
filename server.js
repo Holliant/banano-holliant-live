@@ -2,6 +2,7 @@ require("dotenv").config();
 const config = require(`./config.json`);
 
 const express = require("express");
+var moment = require('moment');
 const app = express();
 
 const lottoUtils = require("./utils/lottoUtils.js");
@@ -17,6 +18,15 @@ lottoUtils.getLottoAddress().then(res => {
     lottoAddress = res;
 });
 
+setInterval(() => {
+    if (moment().endOf("day") - Date.now() <= 10000) {
+        lottoUtils.lottoDraw().then(res => {
+            console.log(res);
+            previousWinner = res;
+        });
+    };
+}, 10000)
+
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
@@ -31,7 +41,6 @@ app.get("/", (req, res, next) => {
 
 app.get("/lotto", async (req, res) => {
     let jackpotAmount = (await lottoUtils.accountInfo(lottoAddress)).balance || 0;
-    console.log(jackpotAmount);
     res.render("lotto", {
         "ticketPrice": config["ticket-price"],
         "jackpotAmount": jackpotAmount,

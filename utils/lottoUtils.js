@@ -108,7 +108,8 @@ const lottoDraw = async () => {
         "address": winnerAddress,
         "tickets": winnerTickets,
         "total": totalEntries,
-        "hash": payoutHash
+        "hash": payoutHash,
+        "jackpot": winAmount
     };
 }
 
